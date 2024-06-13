@@ -5,17 +5,16 @@ from lib.utils import format_single_video_to_dict
 
 app = Flask(__name__)
 CORS(app)
-# test = {'message': 'hello world'}
 
 @app.route('/')
 def hello_world():
-    # print(request.args.get('ytid'))
-    video = get_by_ytid(request.args.get('ytid'))
-    labels = get_labels_by_ytid(request.args.get('ytid'))
-    title = get_youtube_title(request.args.get('ytid'))
-    # print(title)
-    # print(video)
-    # print(labels)
+    print(len(request.args))
+    video = None
+    title = ""
+    if len(request.args) > 0:
+        video = get_by_ytid(request.args.get('ytid'))
+        labels = get_labels_by_ytid(request.args.get('ytid'))
+        title = get_youtube_title(request.args.get('ytid'))
 
     if video:
         test = format_single_video_to_dict(video, labels)
